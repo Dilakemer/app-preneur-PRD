@@ -1,8 +1,8 @@
 import { v4 as uuidv4 } from 'uuid';
-import { Arac } from './types';
+import { Arac, VARSAYILAN_BILDIRIMLER } from './types';
 
 // Başlangıç için örnek araçlar
-default export const ornekAraclar: Arac[] = [
+const ornekAraclar: Arac[] = [
   {
     id: uuidv4(),
     plaka: '34ABC123',
@@ -13,6 +13,14 @@ default export const ornekAraclar: Arac[] = [
     sigortaTarihi: '2026-06-15',
     kaskoTarihi: '2026-07-10',
     bakimTarihi: '2026-05-20',
-    bildirimler: { gun60: true, gun30: true },
+    bildirimler: {
+      ...VARSAYILAN_BILDIRIMLER,
+      gun60: true,
+      gun30: true,
+    },
+    olusturmaTarihi: '2026-05-03T00:00:00.000Z',
+    guncellemeTarihi: '2026-05-03T00:00:00.000Z',
   },
 ];
+
+export default ornekAraclar;
