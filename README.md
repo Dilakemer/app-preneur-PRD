@@ -111,5 +111,24 @@ Daha fazla örnek ve test için `backend/API_TEST.md` dosyasına bakabilirsiniz.
 - Proje iki ana klasörden oluşuyor: `caremind/` (mobil) ve `backend/` (API).
 - Her iki klasörde de bağımsız `package.json` ve bağımlılıklar var.
 - Katkı sağlamak için PR gönderebilirsiniz.
+ 
+**Not (güncel yapı):** Mobil uygulama artık `frontend/` klasörü altında bulunuyor. Backend kodu `backend/` dizininde yer alır.
+
+Hızlı çalışma talimatları:
+- Mobil (frontend) dizinine gidip bağımlılıkları yükleyin ve LAN modunda başlatın:
+
+```bash
+cd frontend
+npm install
+npm run start:lan
+```
+
+- Backend'i başlatmak için:
+
+```bash
+cd backend
+npm install
+node index.ts # veya proje script'ine göre çalıştır
+```
 
 Her aşama tamamlandıkça bu dosya güncellenecektir.
