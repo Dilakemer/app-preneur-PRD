@@ -101,6 +101,8 @@ Daha fazla örnek ve test için `backend/API_TEST.md` dosyasına bakabilirsiniz.
 - Bildirimler ve Linking için `app.json` içinde gerekli izinler ve ayarlar mevcut.
 - Geliştirme sırasında hata alırsanız, React/React Native ve Expo sürümlerinin uyumlu olduğundan emin olun.
 
+**Durum:** Frontend yazıldı ve Expo'da test edildi.
+
 ## Backend (backend/)
 - Basit bir Node.js/Express API mevcut.
 - CRUD işlemleri için endpointler ve örnekler yukarıda belirtildiği gibi çalışıyor.
