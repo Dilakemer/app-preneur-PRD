@@ -131,4 +131,11 @@ npm install
 node index.ts # veya proje script'ine göre çalıştır
 ```
 
+## Expo Go Sorun Giderme
+- iPhone'da `Settings > Expo Go > Local Network` izninin açık olduğundan emin olun.
+- Bilgisayar ve telefon aynı Wi-Fi ağına bağlı olmalı; VPN / Private Relay kapalı olmalı.
+- `npm run start:lan` çalışırken QR `exp://192.168.x.x:PORT` biçiminde görünür; bu adres telefonunuzdan erişilebilir olmalı.
+- `start:tunnel` bazı ortamlarda ngrok kaynaklı başarısız olabilir; bu durumda LAN modu ve yerel ağ izni daha güvenilir olur.
+- Uygulama açılmazsa Metro terminalindeki adresi kontrol edin ve gerekiyorsa yeniden başlatın.
+
 Her aşama tamamlandıkça bu dosya güncellenecektir.
