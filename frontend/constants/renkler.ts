@@ -1,0 +1,18 @@
+export const renkler = {
+  arkaPlan: '#F2ECE2',
+  arkaPlanKoyu: '#1F2A37',
+  kart: '#FFF9F1',
+  kartKoyu: '#223047',
+  metin: '#1E2430',
+  metinIkincil: '#5D6778',
+  cizgi: '#E5D7C7',
+  vurgu: '#CC6B3E',
+  vurguSoluk: '#F3D2BF',
+  vurguKoyu: '#B7542D',
+  mavi: '#44678C',
+  yesil: '#2A8A6E',
+  sari: '#D8A431',
+  kirmizi: '#D25C4D',
+  beyaz: '#FFFFFF',
+  siyah: '#000000',
+} as const;
