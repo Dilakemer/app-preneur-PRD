@@ -1,3 +1,4 @@
+import React, { useState } from 'react';
 import {
   FlatList,
   RefreshControl,
@@ -16,7 +17,7 @@ import { renkler } from '../../constants/renkler';
 export default function AnaEkran() {
   const router = useRouter();
   const { araclar, yukleniyor } = useAraclar();
-  const [refreshing, setRefreshing] = React.useState(false);
+  const [refreshing, setRefreshing] = useState(false);
 
   if (yukleniyor) return <Text style={{ padding: 20 }}>Yükleniyor...</Text>;
 

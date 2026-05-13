@@ -1,3 +1,4 @@
+import React from 'react';
 import { Linking, View, Text, Pressable, StyleSheet } from 'react-native';
 
 export default function SigortaTeklifiScreen() {

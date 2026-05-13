@@ -1,6 +1,6 @@
+import React, { useEffect, useMemo, useState } from 'react';
 import { Feather } from '@expo/vector-icons';
 import { Stack, useRouter } from 'expo-router';
-import { useEffect, useMemo, useState } from 'react';
 import {
   ActivityIndicator,
   Alert,
@@ -278,19 +278,21 @@ export const AracForm = ({ mode, aracId }: AracFormProps) => {
         <View style={styles.bolum}>
           <Text style={styles.bolumBaslik}>Bildirim tercihleri</Text>
 
-          {[
-            ['60 gun kala', gun60, setGun60],
-            ['30 gun kala', gun30, setGun30],
-            ['7 gun kala', gun7, setGun7],
-            ['1 gun kala', gun1, setGun1],
-          ].map(([etiket, deger, guncelle]) => (
+          {(
+            [
+              ['60 gun kala', gun60, setGun60],
+              ['30 gun kala', gun30, setGun30],
+              ['7 gun kala', gun7, setGun7],
+              ['1 gun kala', gun1, setGun1],
+            ] as [string, boolean, (v: boolean) => void][]
+          ).map(([etiket, deger, guncelle]) => (
             <View key={etiket} style={styles.switchSatiri}>
               <Text style={styles.switchEtiketi}>{etiket}</Text>
               <Switch
-                onValueChange={guncelle as (value: boolean) => void}
+                onValueChange={guncelle}
                 thumbColor={renkler.beyaz}
                 trackColor={{ false: '#CABEB1', true: renkler.vurgu }}
-                value={deger as boolean}
+                value={deger}
               />
             </View>
           ))}

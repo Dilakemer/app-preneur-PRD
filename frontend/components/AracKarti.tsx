@@ -1,3 +1,4 @@
+import React from 'react';
 import { Pressable, StyleSheet, Text, View } from 'react-native';
 import type { Arac } from '../types/Arac';
 import { KATEGORI_BASLIKLARI } from '../types/Arac';

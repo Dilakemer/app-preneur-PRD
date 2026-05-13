@@ -1,13 +1,13 @@
 # CaReminder — Muayene & Sigorta Takip Uygulaması
 
 ## Proje Hedefi
-Türkiye'deki araç sahiplerinin muayene, sigorta, kasko ve bakım tarihlerini kolayca takip edebilmesini sağlayan, tamamen çevrimdışı çalışan bir mobil uygulama.
+Türkiye'deki araç sahiplerinin muayene, sigorta, kasko ve bakım tarihlerini kolayca takip edebilmesini sağlayan mobil uygulama. Backend ile anlık senkronize çalışırken, çevrimdışı kullanım için de AsyncStorage ile donatılmıştır.
 
 ## MVP Özellikleri
-- Araç ekleme, düzenleme, silme
+- Araç ekleme, düzenleme, silme (Backend senkronizasyonu)
+- Çevrimdışı kullanım desteği (AsyncStorage Fallback)
 - Kritik tarihler için bildirimler (60 ve 30 gün kala)
 - Sigorta teklif ekranı (affiliate link)
-- Tüm veriler cihazda, backend yok
 
 ## Uygulama Görselleri
 
@@ -44,98 +44,50 @@ Türkiye'deki araç sahiplerinin muayene, sigorta, kasko ve bakım tarihlerini k
 ## Teknoloji Yığını
 - React Native 0.73+ (Expo SDK 50+)
 - TypeScript
+- Node.js & Express (Backend)
+- AsyncStorage (Yerel Depolama & Çevrimdışı Mod)
 - React Navigation v6
-- AsyncStorage
 - expo-notifications
 - date-fns
 - NativeWind (Tailwind CSS for RN)
 
-## Klasör Yapısı (Planlanan)
-- app/
-- components/
-- services/
-- hooks/
-- types/
-- utils/
-- constants/
-- assets/
+## Backend ve Frontend Bağlantısı
 
-## Geliştirme Aşamaları
-1. Proje kurulumu ve temel yapılandırma
-2. Navigasyon ve ekran iskeletleri
-3. Veri modeli ve servisler
-4. Bildirim entegrasyonu
-5. UI/UX ve testler
+Projenin backend (Node.js/Express) modülleri tamamlanmış ve frontend ile tam entegre çalışacak duruma getirilmiştir. 
+Frontend uygulaması, `fetch` API kullanarak backend ile haberleşmektedir. Eğer sunucuya erişim yoksa (çevrimdışı durum) `AsyncStorage` devreye girer ve veriler yerel olarak saklanmaya devam eder. Böylece veri kaybı yaşanmadan %100 offline kullanım sağlanır.
 
-## Postman ve API Testleri Hakkında
-
-## Backend ve API Testleri
-
-Artık basit bir Node.js/Express backend ile araçlar için CRUD işlemleri yapılabilir. Tüm endpointler in-memory çalışır.
-
-### API Endpointleri
+### Backend API Endpointleri (api/):
 - `GET    /araclar`   → Tüm araçları getir
 - `POST   /araclar`   → Yeni araç ekle
 - `PUT    /araclar/:id` → Araç güncelle
 - `DELETE /araclar/:id` → Araç sil
+- `PUT    /ayarlar/bildirim-saati` → Bildirim saati güncelle
 
-### Postman ile Test
-1. Sunucuyu başlat: `cd backend && npx ts-node-dev src/index.ts`
-2. Postman'da aşağıdaki istekleri kullan:
-	- GET  `http://localhost:3001/araclar`
-	- POST `http://localhost:3001/araclar` (JSON body ile)
-	- PUT  `http://localhost:3001/araclar/{id}`
-	- DELETE `http://localhost:3001/araclar/{id}`
+### Geliştirme ve Çalıştırma Talimatları
 
-Daha fazla örnek ve test için `backend/API_TEST.md` dosyasına bakabilirsiniz.
+Proje iki ana klasörden oluşuyor: `frontend/` (mobil) ve `backend/` (API).
 
+**1. Backend'i Başlatmak (Proje Ana Dizininden):**
+```bash
+# Projenin root klasöründe:
+npm install
+npm run dev
+# Sunucu http://localhost:3001 adresinde başlar
+```
 
-## Mobil (caremind/)
-- Expo SDK 54+ ve React Native 0.81+ ile kurulu.
-- Bildirimler için `expo-notifications` kullanılıyor. SDK 53+ ile push bildirimleri için Expo Go yerine development build gereklidir.
-- Android için native build almak için:
-	1. `cd caremind`
-	2. `npm install`
-	3. `npx expo prebuild`
-	4. `npx expo run:android`
-- Bildirimler ve Linking için `app.json` içinde gerekli izinler ve ayarlar mevcut.
-- Geliştirme sırasında hata alırsanız, React/React Native ve Expo sürümlerinin uyumlu olduğundan emin olun.
-
-**Durum:** Frontend yazıldı ve Expo'da test edildi.
-
-## Backend (backend/)
-- Basit bir Node.js/Express API mevcut.
-- CRUD işlemleri için endpointler ve örnekler yukarıda belirtildiği gibi çalışıyor.
-
-## Genel
-- Proje iki ana klasörden oluşuyor: `caremind/` (mobil) ve `backend/` (API).
-- Her iki klasörde de bağımsız `package.json` ve bağımlılıklar var.
-- Katkı sağlamak için PR gönderebilirsiniz.
- 
-**Not (güncel yapı):** Mobil uygulama artık `frontend/` klasörü altında bulunuyor. Backend kodu `backend/` dizininde yer alır.
-
-Hızlı çalışma talimatları:
-- Mobil (frontend) dizinine gidip bağımlılıkları yükleyin ve LAN modunda başlatın:
-
+**2. Frontend'i Başlatmak:**
 ```bash
 cd frontend
 npm install
-npm run start:lan
-```
-
-- Backend'i başlatmak için:
-
-```bash
-cd backend
-npm install
-node index.ts # veya proje script'ine göre çalıştır
+npm start
+# veya npm run start:lan
 ```
 
 ## Expo Go Sorun Giderme
 - iPhone'da `Settings > Expo Go > Local Network` izninin açık olduğundan emin olun.
 - Bilgisayar ve telefon aynı Wi-Fi ağına bağlı olmalı; VPN / Private Relay kapalı olmalı.
 - `npm run start:lan` çalışırken QR `exp://192.168.x.x:PORT` biçiminde görünür; bu adres telefonunuzdan erişilebilir olmalı.
-- `start:tunnel` bazı ortamlarda ngrok kaynaklı başarısız olabilir; bu durumda LAN modu ve yerel ağ izni daha güvenilir olur.
 - Uygulama açılmazsa Metro terminalindeki adresi kontrol edin ve gerekiyorsa yeniden başlatın.
+- Backend bağlantısı için IP adresinizi `.env` dosyasına (örneğin `EXPO_PUBLIC_API_URL=http://192.168.x.x:3001/api`) ekleyerek gerçek cihazlarda sunucuya erişebilirsiniz.
 
 Her aşama tamamlandıkça bu dosya güncellenecektir.
